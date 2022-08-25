@@ -13,8 +13,7 @@ export const useHomeBloc = create<HomeState>((set) => ({
             // const result = await imageService.analyzeImage(image);
             // delay for demo purposes
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            set({ error: "bruh moment error" });
-            set({ loading: false });
+            throw new Error("Error");
         } catch (error) {
             set({ loading: false, error: `Ocorreu um erro: ${error}` });
         }

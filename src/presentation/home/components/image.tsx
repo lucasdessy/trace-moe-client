@@ -14,8 +14,12 @@ export const ImageComponent = ({ src }: ImageProps) => {
             justifyContent: "center",
             alignItems: "center",
         }} elevation={3}>
-            {src ? <img src={src} alt="image" /> : <NoPhotographyIcon sx={{ fontSize: "6rem" }} />}
-
+            {src ? <img src={src} alt="image" style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+                aspectRatio: "16/9",
+            }} /> : <NoPhotographyIcon sx={{ fontSize: "6rem" }} />}
         </Paper>
     )
 }
