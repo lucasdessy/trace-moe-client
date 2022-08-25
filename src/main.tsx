@@ -1,20 +1,12 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import "reflect-metadata";
+import { App } from './app';
+import { injectDependencies } from './injection';
 
-import { App } from './presentation/App/App';
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
+injectDependencies();
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>
 )
