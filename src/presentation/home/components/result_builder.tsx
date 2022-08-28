@@ -25,7 +25,7 @@ export const ResultBuilder = () => {
         })}>
             <h2> Resultados </h2>
 
-            {analyzis?.result.map((doc) => {
+            {analyzis?.map((doc) => {
                 const fromMinutes = Math.floor(doc.from / 60);
                 const fromSeconds = Math.trunc(doc.from - fromMinutes * 60);
                 const toMinutes = Math.floor(doc.to / 60);
@@ -48,10 +48,10 @@ export const ResultBuilder = () => {
                             })}>
                                 <ImageComponent src={doc.image} width="20rem" />
                             </div>
-                            <Text> {doc.filename} </Text>
+                            <Text> {doc.name} </Text>
                             <Text> Episódio {doc.episode ?? 1} </Text>
                             <Text> Entre {fromString} - {toString}</Text>
-                            <Text> Similaridade {parseFloat(doc.similarity.toFixed(4)) * 100}% </Text>
+                            <Text> Similaridade {(doc.similarity * 100).toFixed(2)}% </Text>
                         </div>
                         <Button variant="contained" onClick={() => {
                             const link = `https://anilist.co/anime/${doc.anilist}`;
