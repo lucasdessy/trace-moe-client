@@ -6,14 +6,14 @@ import { HomeState } from "./home_state";
 export const useHomeBloc = create<HomeState>((set) => ({
     loading: false,
     error: undefined,
-    analyzeImage: async (image: string) => {
+    analyzis: undefined,
+    analyzeImage: async (image: File) => {
         try {
             set({ loading: true, error: undefined });
             const imageService = container.resolve<ImageService>("ImageService");
-            // const result = await imageService.analyzeImage(image);
-            // delay for demo purposes
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            throw new Error("Error");
+            const imageAnalysis = await imageService.analyzeImage(image);
+            console.log(imageAnalysis);
+            set({ loading: false, analyzis: imageAnalysis });
         } catch (error) {
             set({ loading: false, error: `Ocorreu um erro: ${error}` });
         }

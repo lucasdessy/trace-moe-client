@@ -5,10 +5,11 @@ import { ImageComponent } from "./components/image";
 import styles from "./home.module.css";
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ResultBuilder } from "./components/result_builder";
 
 export const HomePage = () => {
     const { error, loading, analyzeImage, clearError } = useHomeBloc();
-    const [imageUrl, setImageUrl] = useState<string>();
+    const [imageUrl, setImageUrl] = useState<File>();
     return (
         <>
             <Card variant="elevation" className={styles.card}>
@@ -20,19 +21,20 @@ export const HomePage = () => {
                         {error ?? ""}
                     </Alert>
                 </Snackbar>
-                {loading ? <CircularProgress /> :
+                {
                     <>
                         <h1>
                             trace.moe API
                         </h1>
-                        <ImageComponent src={imageUrl} />
+                        <ImageComponent src={imageUrl ? URL.createObjectURL(imageUrl) : undefined} />
+                        {loading && <CircularProgress />}
                         <div className={styles.buttons}>
                             <Button variant="outlined" component="label">
                                 Upload
                                 <input hidden accept="image/*" type="file" onChange={(e) => {
                                     e.preventDefault();
                                     if (e.target.files) {
-                                        setImageUrl(URL.createObjectURL(e.target.files[0]));
+                                        setImageUrl(e.target.files[0]);
                                     }
                                 }} />
                             </Button>
@@ -51,6 +53,7 @@ export const HomePage = () => {
                                 <DeleteIcon />
                             </IconButton>
                         </div>
+                        <ResultBuilder />
                     </>
                 }
 

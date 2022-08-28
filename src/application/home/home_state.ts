@@ -1,6 +1,9 @@
+import { ImageModel } from "../../domain/image/image_model";
+
 export interface HomeState {
     loading: boolean;
     error?: string;
-    analyzeImage: (image: string) => Promise<void>;
+    analyzis?: ImageModel;
+    analyzeImage: (image: File) => Promise<void>;
     clearError: () => void;
 }
