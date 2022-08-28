@@ -1,5 +1,5 @@
-import { ImageAnalysis } from "./image_analysis";
+import { ImageModel } from "./image_model";
 
 export interface ImageService {
-    analyzeImage(image: File): Promise<ImageAnalysis>;
+    analyzeImage(image: File): Promise<ImageModel>;
 }
