@@ -17,13 +17,18 @@ export const useHomeBloc = create<HomeState>((set) => ({
             const imageAnalysis = await imageService.analyzeImage(image);
             const images: ImageModelResult[] = [];
             for (const anime of imageAnalysis.result) {
-                const result = await anilistService.getInfo(anime.anilist);
-                if (!result.isAdult) {
-                    console.log("Adding image: " + anime.anilist);
-                    images.push({ ...anime, name: result.title.romaji });
-                } else {
-                    console.log("Skipping image: " + anime.anilist);
+                try {
+                    const result = await anilistService.getInfo(anime.anilist);
+                    if (!result.isAdult) {
+                        console.log("Adding image: " + anime.anilist);
+                        images.push({ ...anime, name: result.title.romaji });
+                    } else {
+                        console.log("Skipping image: " + anime.anilist);
 
+                    }
+                } catch (err) {
+                    console.error(err);
+                    continue;
                 }
             }
             set({ loading: false, analyzis: images });
@@ -33,4 +38,5 @@ export const useHomeBloc = create<HomeState>((set) => ({
         }
     },
     clearError: () => set({ error: undefined }),
+    clearResult: () => set({ analyzis: undefined }),
 }));

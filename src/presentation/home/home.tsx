@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { ResultBuilder } from "./components/result_builder";
 
 export const HomePage = () => {
-    const { error, loading, analyzeImage, clearError } = useHomeBloc();
+    const { error, loading, analyzeImage, clearError, clearResult } = useHomeBloc();
     const [imageUrl, setImageUrl] = useState<File>();
     return (
         <>
@@ -47,7 +47,10 @@ export const HomePage = () => {
                                 Enviar
                             </Button>
                             <IconButton
-                                onClick={() => setImageUrl(undefined)}
+                                onClick={() => {
+                                    setImageUrl(undefined);
+                                    clearResult();
+                                }}
                                 disabled={imageUrl === undefined}
                             >
                                 <DeleteIcon />

@@ -6,4 +6,5 @@ export interface HomeState {
     analyzis?: ImageModelResult[];
     analyzeImage: (image: File) => Promise<void>;
     clearError: () => void;
+    clearResult: () => void;
 }
